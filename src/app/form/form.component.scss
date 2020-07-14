@@ -1,0 +1,28 @@
+.has-danger {
+  .form-control {
+    border: 1px solid #d9534f;
+  }
+}
+
+.has-success {
+  .form-control {
+    border: 1px solid #5cb85c;
+  }
+}
+
+.form-control {
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+.form-control-feedback {
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #dc3545;
+}
+
+.color-white {
+  color: white;
+}

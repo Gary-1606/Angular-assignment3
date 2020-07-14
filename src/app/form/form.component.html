@@ -1,0 +1,227 @@
+<h3 class="color-white text-center mb-4">Job Application Form Widget</h3>
+<div class="card card-body m-auto w-50">
+  <form novalidate [formGroup]="applicationForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-sm-6">
+        <div
+          class="form-group"
+          [ngClass]="{
+            'has-danger': firstName.invalid && firstName.dirty,
+            'has-success': firstName.valid && firstName.dirty
+          }"
+        >
+          <input
+            placeholder="First name"
+            type="text"
+            class="form-control"
+            formControlName="firstName"
+          />
+          <div
+            class="form-control-feedback"
+            *ngIf="firstName.errors && (firstName.dirty || firstName.touched)"
+          >
+            <p *ngIf="firstName.errors.required">FirstName is required</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div
+          class="form=group"
+          [ngClass]="{
+            'has-danger': lastName.invalid && lastName.dirty,
+            'has-success': lastName.valid && lastName.dirty
+          }"
+        >
+          <input
+            placeholder="Last name"
+            type="text"
+            class="form-control"
+            formControlName="lastName"
+          />
+          <div
+            class="form-control-feedback"
+            *ngIf="lastName.errors && (lastName.dirty || lastName.touched)"
+          >
+            <p *ngIf="lastName.errors.required">LastName is required</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div
+          class="form-group"
+          [ngClass]="{
+            'has-danger': email.invalid && email.dirty,
+            'has-success': email.valid && email.dirty
+          }"
+        >
+          <input
+            placeholder="Email"
+            type="email"
+            class="form-control"
+            formControlName="email"
+          />
+          <div
+            class="form-control-feedback"
+            *ngIf="email.errors && (email.dirty || email.touched)"
+          >
+            <p *ngIf="email.errors.required">Email is required</p>
+            <p *ngIf="email.errors.pattern">Email should have @ symbol</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div
+          class="form-group"
+          [ngClass]="{
+            'has-danger': phone.invalid && phone.dirty,
+            'has-success': phone.valid && phone.dirty
+          }"
+        >
+          <input
+            placeholder="phone (Enter 10 digits)"
+            type="text"
+            class="form-control"
+            formControlName="phone"
+          />
+          <div
+            class="form-control-feedback"
+            *ngIf="phone.errors && (phone.dirty || phone.touched)"
+          >
+            <p *ngIf="phone.errors.required">Phone number is required</p>
+            <p *ngIf="phone.errors.pattern">
+              Phone number should be in proper format
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div
+          class="form-group"
+          [ngClass]="{
+            'has-danger': country.invalid && (country.dirty || country.touched),
+            'has-success': country.valid && (country.dirty || country.touched)
+          }"
+        >
+          <select class="form-control" formControlName="country">
+            <option value="">Select Country</option>
+            <option *ngFor="let country of countryList" [value]="country"
+              >{{ country }}
+            </option>
+          </select>
+          <div
+            class="form-control-feedback"
+            *ngIf="country.errors && (country.dirty || country.touched)"
+          >
+            <p *ngIf="country.errors.required">Select a country</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div
+          class="form-group"
+          [ngClass]="{
+            'has-danger': address.invalid && address.dirty,
+            'has-success': address.valid && address.dirty
+          }"
+        >
+          <input
+            placeholder="address"
+            type="text"
+            class="form-control"
+            formControlName="address"
+          />
+          <div
+            class="form-control-feedback"
+            *ngIf="address.errors && (address.dirty || address.touched)"
+          >
+            <p *ngIf="address.errors.required">Address is required</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div
+          class="form-group"
+          [ngClass]="{
+            'has-danger':
+              position.invalid && (position.dirty || position.touched),
+            'has-success':
+              position.valid && (position.dirty || position.touched)
+          }"
+        >
+          <select class="form-control" formControlName="position">
+            <option value="">Choose desired position</option>
+            <option *ngFor="let position of designation" [value]="position"
+              >{{ position }}
+            </option>
+          </select>
+          <div
+            class="form-control-feedback"
+            *ngIf="position.errors && (position.dirty || position.touched)"
+          >
+            <p *ngIf="position.errors.required">Position is required</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div
+          class="form-group"
+          [ngClass]="{
+            'has-danger': information.invalid && information.dirty,
+            'has-success': information.valid && information.dirty
+          }"
+        >
+          <textarea
+            placeholder="Additional Information"
+            class="form-control"
+            formControlName="information"
+            rows="5"
+          ></textarea>
+          <div
+            class="form-control-feedback"
+            *ngIf="
+              information.errors && (information.dirty || information.touched)
+            "
+          >
+            <p *ngIf="information.errors.required">Information is required</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          <input
+            type="file"
+            formControlName="file"
+            (change)="upload($event.target.files)"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="alert alert-danger" *ngIf="!isformValid">
+      Please fill in the details
+    </div>
+    <div class="form-group text-right">
+      <button (click)="resetForm()" class="btn btn-success">Reset</button>
+      <button type="submit" class="btn btn-success ml-2">Send</button>
+    </div>
+  </form>
+</div>
