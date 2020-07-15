@@ -95,7 +95,6 @@ export class FormComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log(this.applicationForm);
     this.createFormControls();
     this.createForms();
     this.firstName.valueChanges
@@ -107,6 +106,7 @@ export class FormComponent implements OnInit {
 
   resetForm() {
     this.applicationForm.reset();
+    this.isValidFileFormat = false;
   }
 
   onSubmit() {

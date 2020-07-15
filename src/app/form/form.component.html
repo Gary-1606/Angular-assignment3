@@ -3,7 +3,17 @@
   <form novalidate [formGroup]="applicationForm" (ngSubmit)="onSubmit()">
     <div class="row">
       <div class="col-sm-6">
-        <div
+        <mat-form-field class="w-100 form-group">
+            <mat-label>First Name</mat-label>
+            <input placeholder="First name"
+            type="text"
+            formControlName="firstName" matInput>
+            <mat-error
+            *ngIf="firstName.errors && (firstName.dirty || firstName.touched) && firstName.errors.required"
+          >FirstName is required
+        </mat-error>
+        </mat-form-field>
+        <!-- <div
           class="form-group"
           [ngClass]="{
             'has-danger': firstName.invalid && firstName.dirty,
@@ -22,11 +32,21 @@
           >
             <p *ngIf="firstName.errors.required">FirstName is required</p>
           </div>
-        </div>
+        </div> -->
       </div>
 
       <div class="col-sm-6">
-        <div
+        <mat-form-field class="w-100 form-group">
+            <mat-label>Last Name</mat-label>
+            <input placeholder="Last name"
+            type="text"
+            formControlName="lastName" matInput>
+            <mat-error
+            *ngIf="lastName.errors && (lastName.dirty || lastName.touched) && lastName.errors.required"
+          >Last Name is required
+        </mat-error>
+        </mat-form-field>
+        <!-- <div
           class="form=group"
           [ngClass]="{
             'has-danger': lastName.invalid && lastName.dirty,
@@ -45,13 +65,27 @@
           >
             <p *ngIf="lastName.errors.required">LastName is required</p>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
 
     <div class="row">
       <div class="col-sm-6">
-        <div
+        <mat-form-field class="w-100 form-group">
+            <mat-label>Email</mat-label>
+            <input placeholder="Email"
+            type="text"
+            formControlName="email" matInput>
+            <mat-error
+            *ngIf="email.errors && (email.dirty || email.touched) && email.errors.required"
+          >Email is required
+        </mat-error>
+        <mat-error
+            *ngIf="email.errors && (email.dirty || email.touched) && email.errors.pattern"
+          >Email should have @ symbol
+        </mat-error>
+        </mat-form-field>
+        <!-- <div
           class="form-group"
           [ngClass]="{
             'has-danger': email.invalid && email.dirty,
@@ -71,39 +105,43 @@
             <p *ngIf="email.errors.required">Email is required</p>
             <p *ngIf="email.errors.pattern">Email should have @ symbol</p>
           </div>
-        </div>
+        </div> -->
       </div>
 
       <div class="col-sm-6">
-        <div
-          class="form-group"
-          [ngClass]="{
-            'has-danger': phone.invalid && phone.dirty,
-            'has-success': phone.valid && phone.dirty
-          }"
-        >
-          <input
-            placeholder="phone (Enter 10 digits)"
+
+        <mat-form-field class="w-100 form-group">
+            <mat-label>Phone</mat-label>
+            <input placeholder="Enter 10 digits"
             type="text"
-            class="form-control"
-            formControlName="phone"
-          />
-          <div
-            class="form-control-feedback"
-            *ngIf="phone.errors && (phone.dirty || phone.touched)"
-          >
-            <p *ngIf="phone.errors.required">Phone number is required</p>
-            <p *ngIf="phone.errors.pattern">
-              Phone number should be in proper format
-            </p>
-          </div>
-        </div>
+            formControlName="phone" matInput>
+            <mat-error
+            *ngIf="phone.errors && (phone.dirty || phone.touched) && phone.errors.required"
+          >Phone number is required
+        </mat-error>
+        <mat-error
+            *ngIf="phone.errors && (phone.dirty || phone.touched) && phone.errors.pattern"
+          >Phone should have 10 digits
+        </mat-error>
+        </mat-form-field>
+ 
       </div>
     </div>
 
     <div class="row">
       <div class="col-12">
-        <div
+        <mat-form-field class="form-group w-100">
+            <mat-label>Choose country</mat-label>
+            <mat-select formControlName="country" >
+              <mat-option *ngFor="let country of countryList" [value]="country"
+              >{{ country }}
+            </mat-option>
+            </mat-select>
+            <mat-error  *ngIf="country.errors && (country.dirty || country.touched) && country.errors.required">
+              Select a Country
+            </mat-error>
+          </mat-form-field>
+        <!-- <div
           class="form-group"
           [ngClass]="{
             'has-danger': country.invalid && (country.dirty || country.touched),
@@ -122,13 +160,25 @@
           >
             <p *ngIf="country.errors.required">Select a country</p>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
 
     <div class="row">
       <div class="col-12">
-        <div
+
+        <mat-form-field class="w-100 form-group">
+            <mat-label>Address</mat-label>
+            <input placeholder="Address"
+            type="text"
+            formControlName="address" matInput>
+            <mat-error
+            *ngIf="address.errors && (address.dirty || address.touched) && address.errors.required"
+          >Address is required
+        </mat-error>
+        </mat-form-field>
+
+        <!-- <div
           class="form-group"
           [ngClass]="{
             'has-danger': address.invalid && address.dirty,
@@ -147,13 +197,25 @@
           >
             <p *ngIf="address.errors.required">Address is required</p>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
 
     <div class="row">
       <div class="col-12">
-        <div
+        <mat-form-field class="form-group w-100">
+            <mat-label>Choose desired position</mat-label>
+            <mat-select formControlName="position" >
+              <mat-option *ngFor="let position of designation" [value]="position"
+              >{{ position }}
+            </mat-option>
+            </mat-select>
+            <mat-error  *ngIf="position.errors && (position.dirty || position.touched) && position.errors.required">
+              Position is required
+            </mat-error>
+          </mat-form-field>
+
+        <!-- <div
           class="form-group"
           [ngClass]="{
             'has-danger':
@@ -174,13 +236,24 @@
           >
             <p *ngIf="position.errors.required">Position is required</p>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
 
     <div class="row">
       <div class="col-12">
-        <div
+        <mat-form-field class="w-100 form-group">
+            <mat-label>Additional Information</mat-label>
+            <textarea placeholder="Information"
+            type="text"
+            formControlName="information" matInput></textarea>
+            <mat-error
+            *ngIf="information.errors && (information.dirty || information.touched) && information.errors.required"
+          >Additional Information is required
+        </mat-error>
+        </mat-form-field>
+
+        <!-- <div
           class="form-group"
           [ngClass]="{
             'has-danger': information.invalid && information.dirty,
@@ -201,7 +274,7 @@
           >
             <p *ngIf="information.errors.required">Information is required</p>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
 
@@ -229,8 +302,8 @@
       Please fill in the details
     </div>
     <div class="form-group text-right">
-      <button (click)="resetForm()" class="btn btn-success">Reset</button>
-      <button type="submit" class="btn btn-success ml-2">Send</button>
+      <button mat-raised-button color="primary" (click)="resetForm()">Reset</button>
+      <button mat-raised-button color="primary" type="submit" class="ml-2" [disabled]="!applicationForm.valid">Send</button>
     </div>
   </form>
 </div>
