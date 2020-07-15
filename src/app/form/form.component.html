@@ -210,9 +210,18 @@
         <div class="form-group">
           <input
             type="file"
+            accept=".pdf,.doc,.docx"
             formControlName="file"
             (change)="upload($event.target.files)"
           />
+          <div
+            class="form-control-feedback"
+            *ngIf="
+              !isValidFileFormat
+            "
+          >
+            <p>Please upload the correct file format</p>
+          </div>
         </div>
       </div>
     </div>

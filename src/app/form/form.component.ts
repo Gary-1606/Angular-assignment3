@@ -28,6 +28,7 @@ import { debounceTime, distinctUntilChanged } from "rxjs/operators";
 export class FormComponent implements OnInit {
   fileLink: Object = {};
   isformValid: boolean = true;
+  isValidFileFormat: boolean = true;
 
   countryList: string[] = [
     "India",
@@ -121,7 +122,9 @@ export class FormComponent implements OnInit {
 
   upload(files: File[]) {
     var formData = new FormData();
-    Array.from(files).forEach((f) => formData.append("file", f));
+    if(files[0].name.includes(".docx") || files[0].name.includes(".pdf") || files[0].name.includes(".doc")) {
+      this.isValidFileFormat = true;
+      Array.from(files).forEach((f) => formData.append("file", f));
 
     this.http
       .post("https://file.io", formData, {
@@ -133,5 +136,10 @@ export class FormComponent implements OnInit {
           this.fileLink = event.body;
         }
       });
+    }
+    else {
+      this.isValidFileFormat = false;
+    }
+    
   }
 }
